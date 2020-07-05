@@ -1,6 +1,6 @@
 #!/bin/bash
 
 echo "[nodenv] install nodenv and versions"
-source ~/.profile && anyenv install nodenv && source ~/.profile
+anyenv install nodenv && . ~/.profile
 echo yarn >> $NODENV_ROOT/default-packages
-nodenv install 12.18.0 && nodenv rehash && nodenv global 12.18.0
+nodenv install 12.18.1 && nodenv rehash && nodenv global 12.18.1
