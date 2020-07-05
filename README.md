@@ -20,10 +20,15 @@ $ time vagrant up #
 
 # build box
 $ time vagrant halt && time vagrant package --output bionic64-anyenv-v0.1.0.box && md5 bionic64-anyenv-v0.1.0.box
-# add box
+# 43.63s user 2.63s system 21% cpu 3:32.41 total
+# MD5 (bionic64-anyenv-v0.1.0.box) = 723469ba8243e859fabeee2d98e022fe
+
+# add box for test
 $ time vagrant box add mozodev/bionic64-anyenv ./bionic64-anyenv-v0.1.0.box
+
 # deploy
 $ time aws s3 cp ./bionic64-anyenv-v0.1.0.box s3://mozodev/public/
+# 14.29s user 9.71s system 7% cpu 5:08.25 total
 ```
 
 ## [mysql] [dbdeployer](https://github.com/datacharmer/dbdeployer/)
@@ -50,18 +55,20 @@ port               = 5726
 socket             = /tmp/mysql_sandbox5726.sock
 ```
 
-vagrant package --output bionic64-anyenv-v0.1.0.box  43.63s user 2.63s system 21% cpu 3:32.41 total
-MD5 (bionic64-anyenv-v0.1.0.box) = 723469ba8243e859fabeee2d98e022fe
+## install drupal 8, 9
 
-cd /vagrant/web
+```zsh
+$ cd /vagrant/web
+$ php ./core/scripts/drupal quick-start standard
 
-php ./core/scripts/drupal quick-start standard
+$ chmod +w web/sites/default
+$ drush si standard --site-name=drupal 8 --locale=ko --db-url=pgsql://postgres:postgres@127.0.0.1/d8
 
-chmod +w web/sites/default
-drush si standard --site-name=drupal 8 --locale=ko --db-url=pgsql://postgres:postgres@127.0.0.1/d8
+$ chmod +w web/sites/default
+$ drush si standard --site-name=drupal 9 --locale=ko --db-url=pgsql://postgres:postgres@127.0.0.1/d9
+```
 
-chmod +w web/sites/default
-drush si standard --site-name=drupal 9 --locale=ko --db-url=pgsql://postgres:postgres@127.0.0.1/d9
+## vm spec
 
 ```bash
 #1 [OS]
