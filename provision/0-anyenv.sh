@@ -14,6 +14,6 @@ if [ ! -d "$HOME/.config/anyenv/anyenv-install" ]; then yes | anyenv install --i
 eval "$(anyenv init -)" && echo 'eval "$(anyenv init -)"' >> ~/.profile  && . ~/.profile
 
 echo "install hugo"
-VERSION=0.73.0
+VERSION=0.74.1
 curl -L "https://github.com/gohugoio/hugo/releases/download/v${VERSION}/hugo_${VERSION}_Linux-64bit.tar.gz" | tar -xz hugo
 sudo mv hugo /usr/local/bin/

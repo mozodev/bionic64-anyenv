@@ -23,12 +23,6 @@ dpkg --list \
     | grep linux-source \
     | xargs apt-get -y purge;
 
-# Delete development packages
-dpkg --list \
-    | awk '{ print $2 }' \
-    | grep -- '-dev$' \
-    | xargs apt-get -y purge;
-
 # delete docs packages
 dpkg --list \
     | awk '{ print $2 }' \
@@ -59,9 +53,6 @@ _EOF_
 # Delete the massive firmware packages
 rm -rf /lib/firmware/*
 rm -rf /usr/share/doc/linux-firmware/*
-
-# reinstall required library
-apt-get -y install libtidy-dev libonig-dev
 
 apt-get -y autoremove;
 apt-get -y clean;
