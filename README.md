@@ -17,18 +17,21 @@ A vagrant box for web development on ubuntu bionic64 (virtualbox).
 ```zsh
 # use
 $ time vagrant up #
+# vagrant up  5.70s user 2.41s system 21% cpu 38.385 total
 
 # build box
-$ time vagrant halt && time vagrant package --output bionic64-anyenv-v0.1.0.box && md5 bionic64-anyenv-v0.1.0.box
-# 43.63s user 2.63s system 21% cpu 3:32.41 total
-# MD5 (bionic64-anyenv-v0.1.0.box) = 723469ba8243e859fabeee2d98e022fe
+$ time vagrant halt && time vagrant package --output bionic64-anyenv-v0.1.1.box && md5 bionic64-anyenv-v0.1.1.box
+# vagrant halt  2.79s user 0.64s system 25% cpu 13.565 total
+# vagrant package --output bionic64-anyenv-v0.1.1.box  43.05s user 2.60s system 23% cpu 3:16.62 total
+# MD5 (bionic64-anyenv-v0.1.1.box) = 29f83fe455b971f440081d954e32c5c3
 
 # add box for test
-$ time vagrant box add mozodev/bionic64-anyenv ./bionic64-anyenv-v0.1.0.box
+$ time vagrant box add bionic64-anyenv ./bionic64-anyenv-v0.1.1.box
+# vagrant box add mozodev/bionic64-anyenv ./bionic64-anyenv-v0.1.1.box  5.92s user 4.02s system 97% cpu 10.243 total
 
 # deploy
-$ time aws s3 cp ./bionic64-anyenv-v0.1.0.box s3://mozodev/public/
-# 14.29s user 9.71s system 7% cpu 5:08.25 total
+$ time aws s3 cp ./bionic64-anyenv-v0.1.1.box s3://mozodev/public/
+# aws s3 cp ./bionic64-anyenv-v0.1.1.box s3://mozodev/public/  27.75s user 28.81s system 50% cpu 1:51.98 total
 ```
 
 ## [mysql] [dbdeployer](https://github.com/datacharmer/dbdeployer/)
